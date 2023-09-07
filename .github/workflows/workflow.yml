@@ -3,7 +3,7 @@ name: Build and Push Docker Image to ECR
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   build-and-push:
@@ -18,20 +18,20 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: your-aws-region  # Replace with your AWS region
+        aws-region: me-south-1  # Replace with your AWS region
 
     - name: Login to Amazon ECR
       run: |
-        aws ecr get-login-password --region your-aws-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-aws-region.amazonaws.com
+        aws ecr get-login-password --region me-south-1 | docker login --username AWS --password-stdin 776126797832.dkr.ecr.me-south-1.amazonaws.com
       env:
-        AWS_ACCOUNT_ID: your-account-id
-        AWS_REGION: your-aws-region
+        AWS_ACCOUNT_ID: 776126797832
+        AWS_REGION: me-south-1
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t your-image-name .
-        docker tag your-image-name:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/your-repo-name:latest
-        docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/your-repo-name:latest
+        docker build -t ewanc .
+        docker tag ewanc:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ewanc:latest
+        docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ewanc:latest
       env:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        AWS_REGION: your-aws-region
+        AWS_REGION: me-south-1
