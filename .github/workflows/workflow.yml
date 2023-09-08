@@ -29,6 +29,7 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
+        mv .env.example .env
         docker build -t ewanc .
         docker tag ewanc:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ewanc:latest
         docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ewanc:latest
