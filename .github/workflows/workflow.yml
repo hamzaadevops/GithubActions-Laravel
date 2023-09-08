@@ -33,7 +33,7 @@ jobs:
         docker build -t ewanc .
         docker tag ewanc:latest 776126797832.dkr.ecr.me-south-1.amazonaws.com/ewanc:latest
                                    
-        docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ewanc:latest
+        docker push 776126797832.dkr.ecr.me-south-1.amazonaws.com/ewanc:latest
       env:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         AWS_REGION: me-south-1
